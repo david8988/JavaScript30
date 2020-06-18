@@ -29,30 +29,98 @@
 
     const people = ['Beck, Glenn', 'Becker, Carl', 'Beckett, Samuel', 'Beddoes, Mick', 'Beecher, Henry', 'Beethoven, Ludwig', 'Begin, Menachem', 'Belloc, Hilaire', 'Bellow, Saul', 'Benchley, Robert', 'Benenson, Peter', 'Ben-Gurion, David', 'Benjamin, Walter', 'Benn, Tony', 'Bennington, Chester', 'Benson, Leana', 'Bent, Silas', 'Bentsen, Lloyd', 'Berger, Ric', 'Bergman, Ingmar', 'Berio, Luciano', 'Berle, Milton', 'Berlin, Irving', 'Berne, Eric', 'Bernhard, Sandra', 'Berra, Yogi', 'Berry, Halle', 'Berry, Wendell', 'Bethea, Erin', 'Bevan, Aneurin', 'Bevel, Ken', 'Biden, Joseph', 'Bierce, Ambrose', 'Biko, Steve', 'Billings, Josh', 'Biondo, Frank', 'Birrell, Augustine', 'Black, Elk', 'Blair, Robert', 'Blair, Tony', 'Blake, William'];
 
-    // Array.prototype.filter()
+    //Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+
+    let filteredArr=inventors.filter(invObj=>{if(invObj.year>=1500 && invObj.year<1600) return invObj;})
+
+    console.log(filteredArr)
+
+
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
 
+    let mappedArr=inventors.map(inventor=>
+      "first: "+inventor.first + ", last: "+inventor.last+"."
+    )
+
+    console.log(mappedArr)
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+
+    let sortedArr=inventors.sort((inventor1,inventor2)=>inventor2.year-inventor1.year);
+
+    console.log(sortedArr)
+
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
 
+    let reducedByYears = inventors.reduce((sum,inventor)=>sum+(inventor.passed-inventor.year),0);
+
+    console.log(reducedByYears)
+
     // 5. Sort the inventors by years lived
+
+    let sortedArr2=inventors.sort((inventor1,inventor2)=>(inventor2.passed-inventor2.year)-(inventor1.passed-inventor1.year));
+
+    console.log(sortedArr2)
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
+
+    //work this in the  web developers console:
+
+   /* const cat=document.querySelector(".mw-category");
+    const links=cat.querySelectorAll("a");
+    const linksArr=[...links];
+    const withDe=linksArr.map(link=>link.textContent);
+    withDe.filter(street=>street.includes("de"));*/
+
+
+
 
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
 
+    let sortedArr3=people.sort((person1,person2)=>{
+      let splited1=person1.split(",");
+      let splited2=person2.split(",");
+      let lastName1 = splited1[0].toUpperCase(); // ignore upper and lowercase
+      let lastName2= splited2[0].toUpperCase(); // ignore upper and lowercase
+      if (lastName1 < lastName2) {
+        return 1;
+      }
+      if (lastName1 > lastName2) {
+        return -1;
+      }
+
+      // names must be equal
+      return 0;
+    });
+
+    console.log(sortedArr3)
+
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+
+    let reducedData = data.reduce((sum,data)=>{
+        console.log(sum)
+        if(!sum.hasOwnProperty(data)){
+          sum[data]=1;
+          
+        }else if(sum.hasOwnProperty(data)){
+          sum[data]++;
+        }
+        
+
+        return sum;
+      },{});
+
+    console.log(reducedData)
 
   </script>
 </body>
